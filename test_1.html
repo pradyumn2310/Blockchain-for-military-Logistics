@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Locations</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* Set the size of the map div */
+        #map {
+            height: 100vh; /* Full viewport height */
+            width: 100%;   /* Full width */
+        }
+        /* Optional: Make the page full-height */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Warehouse Locations</h1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Define the warehouse locations
+        var locations = [
+            {lat: 19.0760, lng: 72.8777, name: 'Warehouse Mumbai', content: 'This is Warehouse Mumbai'},  // Mumbai
+            {lat: 31.1048, lng: 77.1734, name: 'Warehouse Shimla', content: 'This is Warehouse Shimla'},  // Shimla
+            {lat: 23.2599, lng: 77.4126, name: 'Warehouse Bhopal', content: 'This is Warehouse Bhopal'}   // Bhopal
+        ];
+
+        // Initialize the map and set its view to the center of India
+        var map = L.map('map').setView([22.3511, 78.6677], 6);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers for each location
+        locations.forEach(function(location) {
+            var marker = L.marker([location.lat, location.lng]).addTo(map)
+                .bindPopup(`<b>${location.name}</b><br>${location.content}`);
+        });
+    </script>
+</body>
+</html>
